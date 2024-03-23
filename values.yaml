@@ -1,0 +1,68 @@
+## Ingress configuration
+ingress:
+  ## Enable ingress endpoint
+  enabled: false
+
+  ## Optional ingress class name
+  className:
+
+  ## Maximal body size (default: 2m - increase if uploads failing)
+  maxBodySize: 2m
+
+  ## Additional ingress annotations
+  annotations: 
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+
+  ## Additional ingress labels
+  labels: {}
+
+  ## Hosts
+  hosts:
+    - host:
+      paths:
+        - path: /
+          pathType: Prefix
+
+  ## TLS settings for hosts
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+replicaCount: 1
+image:
+  repository: aputra/rust-app-lesson147
+  pullPolicy: Always
+  tag: latest
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 50050
+  containerPort: 50050
+resources: 
+  limits:
+    cpu: 200m
+    memory: 512Mi
+  requests:
+    cpu: 100m
+    memory: 256Mi
+
+
+# Additional volumes on the output Deployment definition.
+volumes: []
+# - name: foo
+#   secret:
+#     secretName: mysecret
+#     optional: false
+
+# Additional volumeMounts on the output Deployment definition.
+volumeMounts: []
+# - name: foo
+#   mountPath: "/etc/foo"
+#   readOnly: true
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
