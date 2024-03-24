@@ -31,14 +31,14 @@ ingress:
   #      - chart-example.local
 replicaCount: 1
 image:
-  repository: aputra/rust-app-lesson147
+  repository: istabraq/tonic-autometrics
   pullPolicy: Always
   tag: latest
 service:
   type: ClusterIP
-  port: 80
-  targetPort: 50050
-  containerPort: 50050
+  port: 5005
+  targetPort: 50051
+  containerPort: 50051
 resources: 
   limits:
     cpu: 200m
